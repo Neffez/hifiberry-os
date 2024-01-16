@@ -1,0 +1,15 @@
+#!/bin/sh
+. /etc/hifiberry.state
+
+ARGS="-M HiFiBerry -a 10240:10240:24_3:0 -C 1 -r 192000"
+
+if [ -f /etc/squeezelite.json ]; then
+ SERVER=`jq .server.value /etc/squeezelite.json | sed s/\"//g` 2>/dev/null
+ if [ "$SERVER" != "" ]; then
+  ARGS="$ARGS -s $SERVER"
+ fi
+fi
+
+# quick and dirty creation of two instances for the same service
+/bin/squeezelite -o card1 -N "HiFiBerry1" $ARGS -m 12:34:56:78:90:12 -V "$CURRENT_MIXER_CONTROL" -z
+/bin/squeezelite -o card2 -N "HiFiBerry2" $ARGS -m 12:34:56:78:90:13 -V "$CURRENT_MIXER_CONTROL"
