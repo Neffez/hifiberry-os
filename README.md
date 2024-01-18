@@ -1,4 +1,4 @@
-# Customized HiFiBerryOS
+# Customized HiFiBerryOS (Dual Mono)
 
 This repo provides drop-in replacements for HiFiBerryOS to run 2 independent squeezelite instances on the same OS with mono output.
 
